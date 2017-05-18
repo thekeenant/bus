@@ -33,7 +33,7 @@ main() async {
 }
 ```
 
-Also supported is subscribing a object full of handlers:
+Also supported is subscribing an object full of handlers:
 
 ```dart
 class GameListener implements Listener {
@@ -53,14 +53,14 @@ class GameListener implements Listener {
 bus.subscribeAll(new GameListener());
 ```
 
-For your synchronous needs, you can use `SyncBus` to publish and handle messages synchronously.
-
 See the [game example][game] for explicit details.
+
+For your synchronous needs, you can use `SyncBus` to publish and handle messages synchronously.
 
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
 [install]: https://pub.dartlang.org/packages/bus#-pkg-tab-installing
-[game]: https://github.com/thekeenant/dart-bus/blob/master/example/rxbus_game.dart
+[game]: https://github.com/thekeenant/dart-bus/blob/master/example/bus_game.dart
 [tracker]: https://github.com/thekeenant/dart-bus/issues

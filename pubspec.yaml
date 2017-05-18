@@ -1,6 +1,6 @@
 name: bus
 description: A light-weight event bus implementing the pub-sub pattern.
-version: 0.0.5
+version: 0.0.6
 homepage: https://github.com/thekeenant/dart-bus
 author: Keenan Thompson <email@example.com>
 
