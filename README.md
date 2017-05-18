@@ -53,6 +53,8 @@ class GameListener implements Listener {
 bus.subscribeAll(new GameListener());
 ```
 
+For your synchronous needs, you can use `SyncBus` to publish and handle messages synchronously.
+
 See the [game example][game] for explicit details.
 
 ## Features and bugs

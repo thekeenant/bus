@@ -3,11 +3,31 @@ import 'dart:mirrors';
 
 import 'handler.dart';
 
-class Bus<T extends Object> {
+/// A synchronous bus.
+class SyncBus<T extends Object> extends _AbstractBus<T> {
+  SyncBus() : super(new StreamController.broadcast(sync: true));
+
+  /// Post an event to all current handlers on the bus synchronously.
+  void post(T event) {
+    _controller.add(event);
+  }
+}
+
+/// An asynchronous bus.
+class Bus<T extends Object> extends _AbstractBus<T> {
+  Bus() : super(new StreamController.broadcast(sync: false));
+
+  /// Post an event to all current handlers on the bus, asynchronously.
+  Future<Null> post(T event) async {
+    await new Future.sync(() => _controller.add(event));
+  }
+}
+
+abstract class _AbstractBus<T extends Object> {
   StreamController<T> _controller;
 
   /// Create a new bus.
-  Bus() : _controller = new StreamController.broadcast();
+  _AbstractBus(this._controller);
 
   /// Subscribe a class of handlers
   List<StreamSubscription<T>> subscribeAll(Listener listener) {
@@ -62,10 +82,5 @@ class Bus<T extends Object> {
     return filtered.listen((item) {
       method(item);
     });
-  }
-
-  /// Post an event to all current handlers on the bus.
-  post(T event) async {
-    await new Future.sync(() => _controller.add(event));
   }
 }
