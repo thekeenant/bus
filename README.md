@@ -2,6 +2,10 @@
 
 A light-weight event bus library for Dart implementing the pub-sub pattern.
 
+## Install
+
+See [pub.dartlang.org][install] for instructions on how to use bus in your project.
+
 ## Usage
 
 A simple usage example:
@@ -29,7 +33,7 @@ main() async {
 }
 ```
 
-Also supported is subscribing a class full of handlers:
+Also supported is subscribing a object full of handlers:
 
 ```dart
 class GameListener implements Listener {
@@ -55,5 +59,6 @@ See the [game example][game] for explicit details.
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
+[install]: https://pub.dartlang.org/packages/bus#-pkg-tab-installing
 [game]: https://github.com/thekeenant/dart-bus/blob/master/example/rxbus_game.dart
 [tracker]: https://github.com/thekeenant/dart-bus/issues
