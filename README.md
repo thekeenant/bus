@@ -1,4 +1,4 @@
-# dart-bus
+# Event Bus on Dart
 
 A light-weight event bus library for Dart implementing the pub-sub pattern.
 

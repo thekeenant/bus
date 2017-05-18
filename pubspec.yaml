@@ -1,7 +1,7 @@
 name: bus
 description: A light-weight event bus implementing the pub-sub pattern.
-version: 0.0.1
-homepage: https://github.com/thekeenant/rxbus
+version: 0.0.2
+homepage: https://github.com/thekeenant/dart-bus
 author: Keenan Thompson <email@example.com>
 
 environment:

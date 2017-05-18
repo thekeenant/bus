@@ -64,7 +64,7 @@ class Bus<T extends Object> {
     });
   }
 
-  /// Post an event to the bus
+  /// Post an event to all current handlers on the bus.
   post(T event) async {
     await new Future.sync(() => _controller.add(event));
   }
