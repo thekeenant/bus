@@ -1,4 +1,4 @@
-import 'package:rxbus/rxbus.dart';
+import 'package:bus/bus.dart';
 
 class Event {
   final DateTime timestamp;

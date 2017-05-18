@@ -1,4 +1,4 @@
-import 'package:rxbus/rxbus.dart';
+import 'package:bus/bus.dart';
 
 /// A generic event which all events extend.
 abstract class GameEvent {

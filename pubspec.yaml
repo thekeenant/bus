@@ -1,4 +1,4 @@
-name: rxbus
+name: bus
 description: A light-weight event bus implementing the pub-sub pattern.
 version: 0.0.1
 homepage: https://github.com/thekeenant/rxbus

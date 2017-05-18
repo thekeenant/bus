@@ -1,4 +1,4 @@
-# rxbus
+# dart-bus
 
 A light-weight event bus library for Dart implementing the pub-sub pattern.
 
@@ -7,7 +7,7 @@ A light-weight event bus library for Dart implementing the pub-sub pattern.
 A simple usage example:
 
 ```dart
-import 'package:rxbus/rxbus.dart';
+import 'package:bus/bus.dart';
 
 class Event {
   final DateTime timestamp;
@@ -31,4 +31,4 @@ main() async {
 
 Please file feature requests and bugs at the [issue tracker][tracker].
 
-[tracker]: https://github.com/thekeenant/rx-bus/issues
+[tracker]: https://github.com/thekeenant/dart-bus/issues

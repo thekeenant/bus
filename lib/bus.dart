@@ -1,4 +1,4 @@
-library rx_bus;
+library bus;
 
 export 'src/handler.dart';
 export 'src/bus.dart';
