@@ -16,7 +16,7 @@ class Event {
 }
 
 main() async {
-  // Create a new bus.
+  // Create a new bus, which accepts messages of type Event.
   var bus = new Bus<Event>();
 
   // Subscribe a single handler
@@ -24,7 +24,7 @@ main() async {
     print('An event occurred at ${event.timestamp}.');
   });
 
-  // post the event and (optional) await for handlers to receive them 
+  // Post the event and (optional) await for handlers to receive them 
   await bus.post(new Event());
 }
 ```
