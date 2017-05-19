@@ -7,7 +7,7 @@ int _ints;
 int _strings;
 int _bools;
 
-class MyListener implements Listener {
+class MyListener {
   @handler
   _onInt(int message) {
     _ints++;

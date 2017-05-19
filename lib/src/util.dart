@@ -6,7 +6,7 @@ bool hasHandlerAnnotation(DeclarationMirror decl) {
   return decl.metadata.where((meta) => meta.reflectee is Handler).isNotEmpty;
 }
 
-List<InstanceMirror> handlerMethods(Listener listener) {
+List<InstanceMirror> handlerMethods(Object listener) {
   InstanceMirror instance = reflect(listener);
   ClassMirror clazz = instance.type;
 

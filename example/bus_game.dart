@@ -22,7 +22,7 @@ class JumpEvent extends GameEvent {
 }
 
 /// Listens to various game events.
-class GameListener implements Listener {
+class GameListener {
   @handler
   void _onGame(GameEvent event) {
     print('[An event occurred at ${event.timestamp}]');

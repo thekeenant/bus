@@ -73,7 +73,7 @@ abstract class _AbstractBus<T extends Object> {
   }
 
   /// Subscribe a class of handlers
-  List<StreamSubscription<T>> subscribeAll(Listener listener) {
+  List<StreamSubscription<T>> subscribeAll(Object listener) {
     var methods = handlerMethods(listener);
     return methods.map((mirror) => subscribe(mirror.reflectee, typeCheck: false)).toList();
   }
