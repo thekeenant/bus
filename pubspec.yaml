@@ -1,8 +1,8 @@
 name: bus
 description: A light-weight event bus implementing the pub-sub pattern.
-version: 0.0.9
+version: 0.0.10
 homepage: https://github.com/thekeenant/dart-bus
-author: Keenan Thompson <email@example.com>
+author: Keenan Thompson <keenan@keenant.com>
 
 environment:
   sdk: '>=1.20.1 <2.0.0'

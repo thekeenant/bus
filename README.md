@@ -34,12 +34,12 @@ Also supported is subscribing an object full of handlers:
 ```dart
 class GameListener implements Listener {
   @handler
-  _onGame(GameEvent event) {
+  void _onGame(GameEvent event) {
     print('[An event occurred at ${event.timestamp}]');
   }
 
   @handler
-  _onChat(ChatEvent event) {
+  void _onChat(ChatEvent event) {
     print('${event.username} says "${event.message}"');
   }
 }
