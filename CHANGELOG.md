@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.10
+
+- Remove Listener.
+
 ## 0.0.8
 
 - Add tests (sync, async and listeners tests).
