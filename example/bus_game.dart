@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'package:bus/bus.dart';
 
 /// A generic event which all events extend.

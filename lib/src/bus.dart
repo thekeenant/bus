@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:mirrors';
 
 import 'handler.dart';
+import 'util.dart';
 
 /// A synchronous bus.
 class SyncBus<T extends Object> extends _AbstractBus<T> {
@@ -26,58 +27,49 @@ class Bus<T extends Object> extends _AbstractBus<T> {
 abstract class _AbstractBus<T extends Object> {
   StreamController<T> _controller;
 
-  /// Create a new bus.
+  /// Create a new bus
   _AbstractBus(this._controller);
+
+  /// The type of message that can be published
+  Type get messageType {
+    return reflect(this).type.typeArguments.first.reflectedType;
+  }
 
   /// Subscribe a class of handlers
   List<StreamSubscription<T>> subscribeAll(Listener listener) {
-    // List of subscriptions
-    var rtn = <StreamSubscription<T>>[];
-
-    InstanceMirror mirror = reflect(listener);
-
-    mirror.type.declarations.forEach((sym, decl) {
-      // Declaration must be a method
-      if (!(decl is MethodMirror))
-        return;
-
-      MethodMirror method = decl as MethodMirror;
-
-      bool isHandler = method.metadata.where((meta) => meta.reflectee is Handler).isNotEmpty;
-
-      // @handler annotation must exist
-      if (!isHandler)
-        return;
-
-      if (method.parameters.length != 1) {
-        throw new ArgumentError('@handler methods must take exactly one argument');
-      }
-      InstanceMirror field = mirror.getField(sym);
-      rtn.add(subscribe(field.reflectee));
-    });
-
-    return rtn;
+    var methods = handlerMethods(listener);
+    return methods.map((mirror) => subscribe(mirror.reflectee)).toList();
   }
 
   /// Subscribe one handler
-  StreamSubscription<T> subscribe(method<V extends T>(V event)) {
+  StreamSubscription<V> subscribe<V extends T>(method(V event)) {
     ClosureMirror mirror = reflect(method);
 
-    Type type = mirror.function.parameters.first.type.reflectedType;
-    ClassMirror eventType;
+    if (mirror.function.parameters.length != 1)
+      throw new ArgumentError('handlers must take exactly one argument');
 
-    try {
-      eventType = reflectType(type);
+    Type type = mirror.function.parameters.first.type.reflectedType;
+    var eventType = reflectType(type);
+    var filter;
+
+    // type is specified
+    if (eventType is ClassMirror) {
+      filter = (item) {
+      ClassMirror itemClass = reflectType(item.runtimeType);
+      return itemClass.isSubclassOf(eventType);
+      };
     }
-    catch (e) {
-      throw new ArgumentError('invalid closure provided');
+    // none specified
+    else if (eventType is TypeMirror) {
+      // accept all events
+      filter = (item) => true;
+    }
+    else {
+      throw new ArgumentError('invalid handler parameters');
     }
 
     // filter stream such that only subclasses are triggered
-    Stream<T> filtered = _controller.stream.where((item) {
-      ClassMirror itemClass = reflectType(item.runtimeType);
-      return itemClass.isSubclassOf(eventType);
-    });
+    var filtered = _controller.stream.where(filter);
 
     return filtered.listen((item) {
       method(item);

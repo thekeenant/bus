@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.0.7
+
+- Getter for message type
+- Internal changes, util file for helpers
+
 ## 0.0.5
 
 - Synchronous bus, via `new SyncBus<T>()`.
