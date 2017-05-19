@@ -2,6 +2,11 @@
 
 A light-weight event bus library for Dart implementing the pub-sub pattern.
 
+![diagram](http://i.imgur.com/gBnIdO5.png)
+
+Send a message to the bus and let the bus distribute the message to various handlers which are subscribed to that type of
+event. This library utilizes the `Stream` async library in Dart to handle subscriptions and publishing messages.
+
 ## Install
 
 See [pub.dartlang.org][install] for instructions on how to use bus in your project.
