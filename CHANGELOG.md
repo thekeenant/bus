@@ -1,5 +1,9 @@
 # Changelog
 
+## 0.0.8
+
+- Add tests (sync, async and listeners tests).
+
 ## 0.0.7
 
 - Getter for message type
