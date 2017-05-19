@@ -1,18 +1,11 @@
 import 'package:bus/bus.dart';
 
-class Event {
-  final DateTime timestamp;
-
-  Event() : this.timestamp = new DateTime.now();
-}
-
 main() async {
-  // Create a new bus.
-  var bus = new Bus<Event>();
+  var bus = new Bus<String>();
 
-  bus.subscribe((Event event) {
-    print('An event occurred at ${event.timestamp}.');
+  bus.subscribe((String message) {
+    print('Received a string: "$message"');
   });
 
-  await bus.post(new Event());
+  await bus.post('Hey there!');
 }

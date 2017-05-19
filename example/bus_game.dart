@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:bus/bus.dart';
 
 /// A generic event which all events extend.
@@ -25,12 +24,12 @@ class JumpEvent extends GameEvent {
 /// Listens to various game events.
 class GameListener implements Listener {
   @handler
-  _onGame(GameEvent event) {
+  void _onGame(GameEvent event) {
     print('[An event occurred at ${event.timestamp}]');
   }
 
   @handler
-  _onChat(ChatEvent event) {
+  void _onChat(ChatEvent event) {
     print('${event.username} says "${event.message}"');
   }
 }

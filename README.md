@@ -18,23 +18,14 @@ A simple usage example:
 ```dart
 import 'package:bus/bus.dart';
 
-class Event {
-  final DateTime timestamp;
-
-  Event() : this.timestamp = new DateTime.now();
-}
-
 main() async {
-  // Create a new bus, which accepts messages of type Event.
-  var bus = new Bus<Event>();
+  var bus = new Bus<String>();
 
-  // Subscribe a single handler
-  bus.subscribe((Event event) {
-    print('An event occurred at ${event.timestamp}.');
+  bus.subscribe((String message) {
+    print('Received a string: "$message"');
   });
 
-  // Post the event and (optional) await for handlers to receive them 
-  await bus.post(new Event());
+  await bus.post('Hey there!');
 }
 ```
 
@@ -55,6 +46,7 @@ class GameListener implements Listener {
 
 ...
 
+var bus = new Bus<GameEvent>();
 bus.subscribeAll(new GameListener());
 ```
 

@@ -35,15 +35,9 @@ abstract class _AbstractBus<T extends Object> {
     return reflect(this).type.typeArguments.first.reflectedType;
   }
 
-  /// Subscribe a class of handlers
-  List<StreamSubscription<T>> subscribeAll(Listener listener) {
-    var methods = handlerMethods(listener);
-    return methods.map((mirror) => subscribe(mirror.reflectee)).toList();
-  }
-
   /// Subscribe one handler
-  StreamSubscription<V> subscribe<V extends T>(method(V event)) {
-    ClosureMirror mirror = reflect(method);
+  StreamSubscription<V> subscribe<V extends T>(void handlerMethod(V event), {bool typeCheck = true}) {
+    ClosureMirror mirror = reflect(handlerMethod);
 
     if (mirror.function.parameters.length != 1)
       throw new ArgumentError('handlers must take exactly one argument');
@@ -54,9 +48,13 @@ abstract class _AbstractBus<T extends Object> {
 
     // type is specified
     if (eventType is ClassMirror) {
+      if (typeCheck && !eventType.isSubtypeOf(reflectType(messageType))) {
+        throw new ArgumentError('handler event parameter type is invalid (typeCheck = true)');
+      }
+
       filter = (item) {
-      ClassMirror itemClass = reflectType(item.runtimeType);
-      return itemClass.isSubclassOf(eventType);
+        ClassMirror itemClass = reflectType(item.runtimeType);
+        return itemClass.isSubtypeOf(eventType);
       };
     }
     // none specified
@@ -71,8 +69,12 @@ abstract class _AbstractBus<T extends Object> {
     // filter stream such that only subclasses are triggered
     var filtered = _controller.stream.where(filter);
 
-    return filtered.listen((item) {
-      method(item);
-    });
+    return filtered.listen((item) => handlerMethod(item));
+  }
+
+  /// Subscribe a class of handlers
+  List<StreamSubscription<T>> subscribeAll(Listener listener) {
+    var methods = handlerMethods(listener);
+    return methods.map((mirror) => subscribe(mirror.reflectee, typeCheck: false)).toList();
   }
 }
