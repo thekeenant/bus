@@ -2,6 +2,9 @@
 
 A light-weight event bus library for Dart implementing the pub-sub pattern.
 
+**Note:** Bus does not currently function when compiled to javascript, as it depends on the Dart mirrors library
+which is not yet complete.
+
 ![diagram](http://i.imgur.com/gBnIdO5.png)
 
 Send a message to the bus and let the bus distribute the message to various handlers which are subscribed to that type of
