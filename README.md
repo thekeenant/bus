@@ -66,10 +66,10 @@ See the [game example][game] for more details.
 
 For your synchronous needs, you can use `SyncBus` to publish and handle messages synchronously.
 
-## Web Example
+## Web Demo
 
-Try it yourself by cloning this repository and running `pub serve web`. This will serve the
-assets in the `web` directory.
+Visit [https://thekeenant.github.io/bus/](https://thekeenant.github.io/bus/). Try it yourself
+by cloning this repository and running `pub serve web`. This will serve the assets in the `web` directory.
 
 ## Features and bugs
 
