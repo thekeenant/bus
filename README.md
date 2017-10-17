@@ -2,8 +2,8 @@
 
 A light-weight event bus library for Dart implementing the pub-sub pattern.
 
-**Note:** Bus does not currently function when compiled to javascript, as it depends on the Dart mirrors library
-which is not yet complete.
+Functionality for JavaScript through dart2js is thanks to [dart-patch-mirrors](https://github.com/matthewfranglen/dart-patch-mirrors)
+which provides some fixes for the buggy mirror functionality. All the examples provided work with dart2js.
 
 ![diagram](http://i.imgur.com/gBnIdO5.png)
 

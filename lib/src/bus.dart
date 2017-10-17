@@ -1,8 +1,9 @@
 import 'dart:async';
 import 'dart:mirrors';
 
-import 'handler.dart';
 import 'util.dart';
+
+import 'package:patch_mirrors/patch_mirrors.dart';
 
 /// A synchronous bus.
 class SyncBus<T extends Object> extends _AbstractBus<T> {
@@ -48,13 +49,13 @@ abstract class _AbstractBus<T extends Object> {
 
     // type is specified
     if (eventType is ClassMirror) {
-      if (typeCheck && !eventType.isSubtypeOf(reflectType(messageType))) {
+      if (typeCheck && !isSubtypeOf(eventType, reflectType(messageType))) {
         throw new ArgumentError('handler event parameter type is invalid (typeCheck = true)');
       }
 
       filter = (item) {
         ClassMirror itemClass = reflectType(item.runtimeType);
-        return itemClass.isSubtypeOf(eventType);
+        return isSubtypeOf(itemClass, eventType);
       };
     }
     // none specified

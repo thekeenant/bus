@@ -7,5 +7,8 @@ author: Keenan Thompson <keenan@keenant.com>
 environment:
   sdk: '>=1.20.1 <2.0.0'
 
+dependencies:
+  patch_mirrors: "^0.0.4"
+
 dev_dependencies:
   test: ^0.12.0
