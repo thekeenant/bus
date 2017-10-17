@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simple Dart App</title>
+
+  <style type="text/css">
+    body {
+      display: flex;
+      flex-direction: row;
+    }
+
+    .left {
+      flex: 1;
+    }
+
+    .right {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+  <div class="left">
+    <h1>Examples</h1>
+    <h2>Example 1</h2>
+    <p>Here you can type into the textbox and the text is updated above it.</p>
+    <b>Text: </b> <span id="example1"></span><br/>
+    <input id="example1-input" type="text"/>
+
+    <h2>Example 2</h2>
+    <p>Check the checkbox, it is recorded in the log.</p>
+    <input id="example2-input" type="checkbox"/>
+
+    <h2>Example 3</h2>
+    <p>Once pressed, you will have to refresh the page to try the other examples.</p>
+    <button id="example3-button">Cancel Subscriptions</button>
+  </div>
+
+  <div class="right">
+    <h1>Event Log</h1>
+    <div id="event-log"></div>
+  </div>
+
+  <script type="application/dart" src="app.dart"></script>
+  <script type="text/javascript" src="packages/browser/dart.js"></script>
+</body>
+</html>
