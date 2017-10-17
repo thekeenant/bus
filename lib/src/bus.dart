@@ -1,9 +1,9 @@
 import 'dart:async';
 import 'dart:mirrors';
 
-import 'util.dart';
-
 import 'package:patch_mirrors/patch_mirrors.dart';
+
+import 'util.dart';
 
 /// A synchronous bus.
 class SyncBus<T extends Object> extends _AbstractBus<T> {
@@ -43,7 +43,7 @@ abstract class _AbstractBus<T extends Object> {
     if (mirror.function.parameters.length != 1)
       throw new ArgumentError('handlers must take exactly one argument');
 
-    Type type = mirror.function.parameters.first.type.reflectedType;
+    var type = mirror.function.parameters.first.type.reflectedType;
     var eventType = reflectType(type);
     var filter;
 
@@ -54,7 +54,7 @@ abstract class _AbstractBus<T extends Object> {
       }
 
       filter = (item) {
-        ClassMirror itemClass = reflectType(item.runtimeType);
+        var itemClass = reflectType(item.runtimeType);
         return isSubtypeOf(itemClass, eventType);
       };
     }

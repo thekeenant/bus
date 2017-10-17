@@ -62,9 +62,14 @@ var subs = bus.subscribeAll(new GameListener()); // returns a list of subscripti
 subs.forEach((s) => s.cancel());
 ```
 
-See the [game example][game] for explicit details.
+See the [game example][game] for more details.
 
 For your synchronous needs, you can use `SyncBus` to publish and handle messages synchronously.
+
+## Web Example
+
+Try it yourself by cloning this repository and running `pub serve web`. This will serve the
+assets in the `web` directory.
 
 ## Features and bugs
 
