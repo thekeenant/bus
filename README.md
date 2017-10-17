@@ -24,11 +24,17 @@ import 'package:bus/bus.dart';
 main() async {
   var bus = new Bus<String>();
 
-  bus.subscribe((String message) {
+  var sub = bus.subscribe((String message) {
     print('Received a string: "$message"');
   });
 
   await bus.post('Hey there!');
+  
+  // cancel the subscription
+  sub.cancel();
+  
+  // the subscription was cancelled, this is pointless
+  bus.post('This message will not be heard...');
 }
 ```
 
@@ -50,7 +56,10 @@ class GameListener implements Listener {
 ...
 
 var bus = new Bus<GameEvent>();
-bus.subscribeAll(new GameListener());
+var subs = bus.subscribeAll(new GameListener()); // returns a list of subscriptions
+
+// remember to cancel your event subscriptions
+subs.forEach((s) => s.cancel());
 ```
 
 See the [game example][game] for explicit details.

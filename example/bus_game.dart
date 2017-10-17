@@ -25,7 +25,7 @@ class JumpEvent extends GameEvent {
 class GameListener {
   @handler
   void _onGame(GameEvent event) {
-    print('[An event occurred at ${event.timestamp}]');
+    print('[An ${event.runtimeType} occurred at ${event.timestamp}]');
   }
 
   @handler
@@ -39,7 +39,7 @@ main() async {
   var bus = new Bus<GameEvent>();
 
   // Register all annotated methods in game listener.
-  bus.subscribeAll(new GameListener());
+  var gameSubscriptions = bus.subscribeAll(new GameListener());
 
   // Listen to a specific event type.
   var sub = bus.subscribe((JumpEvent event) {
@@ -52,10 +52,13 @@ main() async {
   // We can cancel a listener.
   // Note: "await" was used above so that we don't cancel the handler before
   // it is actually handled
-  sub.cancel();
+  await sub.cancel();
 
   // Post another event.
   // Note: "await" is used to prevent the thread from shutting down before the
   // handlers recieve them
   await bus.post(new ChatEvent("Billy", "Hey, this is a chat message!"));
+
+  // Unsubscribe the game events
+  gameSubscriptions.forEach((s) => s.cancel());
 }
